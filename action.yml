@@ -1,19 +1,8 @@
 name: 'Configure Datadog Test Visibility'
 description: 'Installs Datadog tracers for configured languages and enables Test Visibility'
-inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
-    required: false
-    default: 'World'
 runs:
   using: "composite"
   steps:
-    - name: Set Greeting
-      run: echo "Hello $INPUT_WHO_TO_GREET."
-      shell: bash
-      env:
-        INPUT_WHO_TO_GREET: ${{ inputs.who-to-greet }}
-
     - name: Set GitHub Path
       run: echo "$GITHUB_ACTION_PATH" >> $GITHUB_PATH
       shell: bash
