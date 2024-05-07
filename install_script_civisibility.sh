@@ -24,9 +24,9 @@ install_java_tracer() {
     return 1
   fi
 
-  local updated_java_tool_options="$JAVA_TOOL_OPTIONS -Xmx2g -javaagent:$filepath"
+  local updated_java_tool_options="-javaagent:$filepath $JAVA_TOOL_OPTIONS"
   if [ ${#updated_java_tool_options} -le 1024 ]; then
-    echo "JAVA_TOOL_OPTIONS=$updated_java_tool_options"
+    echo "JAVA_TOOL_OPTIONS=\"$updated_java_tool_options\""
   else
     >&2 echo "Error: Cannot apply Java instrumentation: updated JAVA_TOOL_OPTIONS would exceed 1024 characters"
     return 1
@@ -60,7 +60,7 @@ install_js_tracer() {
   fi
 
   local dd_trace_path="$ARTIFACTS_FOLDER/lib/node_modules/dd-trace"
-  echo "NODE_OPTIONS='$NODE_OPTIONS -r %s/ci/init $dd_trace_path'"
+  echo "NODE_OPTIONS=\"$NODE_OPTIONS -r %s/ci/init $dd_trace_path\""
 }
 
 is_node_version_compliant() {
@@ -88,8 +88,8 @@ install_python_tracer() {
     return 1
   fi
 
-  echo "PYTEST_ADDOPTS='--ddtrace $PYTEST_ADDOPTS'"
-  echo "PYTHONPATH='$dd_trace_path:$PYTHONPATH'"
+  echo "PYTEST_ADDOPTS=\"--ddtrace $PYTEST_ADDOPTS\""
+  echo "PYTHONPATH=\"$dd_trace_path:$PYTHONPATH\""
 }
 
 install_dotnet_tracer() {
