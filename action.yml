@@ -1,5 +1,9 @@
 name: 'Configure Datadog Test Visibility'
 description: 'Installs Datadog tracers for configured languages and enables Test Visibility'
+inputs:
+  languages:
+    description: 'List of languages to be instrumented. Can be either all or a space-separated subset of java, js, python, dotnet'
+    required: true
 runs:
   using: "composite"
   steps:
@@ -12,3 +16,5 @@ runs:
     - name: Run goodbye.sh
       run: install_script_civisibility.sh >> "$GITHUB_ENV"
       shell: bash
+      env:
+        DD_CIVISIBILITY_INSTRUMENTATION_LANGUAGES: ${{ inputs.languages }}
