@@ -19,10 +19,14 @@ runs:
       env:
         GITHUB_ACTION_PATH: ${{ github.action_path }}
 
-    - name: Run goodbye.sh
+    - name: Run configuration script
       run: install_script_civisibility.sh >> "$GITHUB_ENV"
       shell: bash
       env:
         DD_CIVISIBILITY_INSTRUMENTATION_LANGUAGES: ${{ inputs.languages }}
-        DD_SERVICE: ${{ inputs.service-name }}
-        DD_API_KEY: ${{ inputs.api-key }}
+
+    - name: Propagate service name and API key from inputs to environment variables
+      run: |
+        echo "DD_SERVICE=${{ inputs.service-name }}" >> "$GITHUB_ENV"
+        echo "DD_API_KEY=${{ inputs.api-key }}" >> "$GITHUB_ENV"
+      shell: bash

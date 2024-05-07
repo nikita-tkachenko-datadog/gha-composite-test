@@ -116,16 +116,6 @@ if [ -z "$DD_ENV" ]; then
   echo "DD_ENV=ci"
 fi
 
-if [ -z "$DD_SERVICE" ]; then
-  >&2 echo "Error: DD_SERVICE environment variable must be set"
-  exit 1;
-fi
-
-if [ -z "$DD_API_KEY" ]; then
-  >&2 echo "Error: DD_API_KEY environment variable must be set"
-  exit 1;
-fi
-
 # install tracer libraries
 if [ -n "$DD_CIVISIBILITY_INSTRUMENTATION_LANGUAGES" ]; then
   if [ "$DD_CIVISIBILITY_INSTRUMENTATION_LANGUAGES" = "all" ]; then
