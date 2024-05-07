@@ -26,7 +26,7 @@ install_java_tracer() {
 
   local updated_java_tool_options="-javaagent:$filepath $JAVA_TOOL_OPTIONS"
   if [ ${#updated_java_tool_options} -le 1024 ]; then
-    echo "JAVA_TOOL_OPTIONS=-javaagent:$filepath -Xmx3g $JAVA_TOOL_OPTIONS"
+    echo "JAVA_TOOL_OPTIONS=$updated_java_tool_options"
   else
     >&2 echo "Error: Cannot apply Java instrumentation: updated JAVA_TOOL_OPTIONS would exceed 1024 characters"
     return 1
