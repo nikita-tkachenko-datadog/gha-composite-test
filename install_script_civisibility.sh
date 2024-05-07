@@ -24,7 +24,7 @@ install_java_tracer() {
     return 1
   fi
 
-  local updated_java_tool_options="-javaagent:$filepath $JAVA_TOOL_OPTIONS"
+  local updated_java_tool_options="$JAVA_TOOL_OPTIONS -Xmx2g -javaagent:$filepath"
   if [ ${#updated_java_tool_options} -le 1024 ]; then
     echo "JAVA_TOOL_OPTIONS=$updated_java_tool_options"
   else
