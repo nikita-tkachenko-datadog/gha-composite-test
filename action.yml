@@ -29,6 +29,12 @@ runs:
       env:
         GITHUB_ACTION_PATH: ${{ github.action_path }}
 
+    - name: Create a folder
+      run: pwd && mkdir .datadog
+      shell: bash
+      env:
+        GITHUB_ACTION_PATH: ${{ github.action_path }}
+
     - name: Run goodbye.sh
       run: goodbye.sh >> "$GITHUB_ENV"
       shell: bash
