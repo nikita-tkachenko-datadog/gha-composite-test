@@ -3,6 +3,9 @@ description: 'Installs Datadog tracers for configured languages and enables Test
 runs:
   using: "composite"
   steps:
+    - name: Print files list
+      run: ls -la
+      shell: bash
     - name: Run Test Visibility install script
       run: install_script_civisibility.sh >> "$GITHUB_ENV"
       shell: bash
