@@ -4,6 +4,12 @@ inputs:
   languages:
     description: 'List of languages to be instrumented. Can be either all or a space-separated subset of java, js, python, dotnet'
     required: true
+  service-name:
+    description: 'The name of the service or library being tested. This value is used for populating "test.service" tag in Datadog.'
+    required: true
+  api-key:
+    description: 'Datadog API key. Can be found at https://app.datadoghq.com/organization-settings/api-keys'
+    required: true
 runs:
   using: "composite"
   steps:
@@ -18,3 +24,5 @@ runs:
       shell: bash
       env:
         DD_CIVISIBILITY_INSTRUMENTATION_LANGUAGES: ${{ inputs.languages }}
+        DD_SERVICE: ${{ inputs.service-name }}
+        DD_API_KEY: ${{ inputs.api-key }}
