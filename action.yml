@@ -33,3 +33,6 @@ runs:
       run: goodbye.sh
       shell: bash
 
+    - name: Set an environment variable
+      run: echo "MY_VAR=this-is-the-value" >> "$GITHUB_ENV"
+      shell: bash
