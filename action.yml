@@ -22,10 +22,14 @@ runs:
     - name: Run configuration script
       run: |
         install_script_civisibility.sh >> "$GITHUB_ENV"
-        echo "Node options is $NODE_OPTIONS"
+        
+        # workaround for https://github.blog/changelog/2023-10-05-github-actions-node_options-is-now-restricted-from-github_env
+        NODE_OPTIONS="$NODE_OPTIONS -r %s/ci/init $DD_TRACER_FOLDER/lib/node_modules/dd-trace"
+        echo "NODE_OPTIONS=${NODE_OPTIONS}" >> $GITHUB_ENV
       shell: bash
       env:
         DD_CIVISIBILITY_INSTRUMENTATION_LANGUAGES: ${{ inputs.languages }}
+        DD_TRACER_FOLDER: ${{ github.workspace }}/.datadog
 
     - name: Propagate service name and API key from inputs to environment variables
       run: |
