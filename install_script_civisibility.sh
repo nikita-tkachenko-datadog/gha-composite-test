@@ -97,10 +97,13 @@ install_python_tracer() {
     return 1
   fi
 
-  pip show ddtrace | grep Location &>2
+  local updated_pytest_add_opts="--ddtrace $PYTEST_ADDOPTS"
+  local updated_python_path="$dd_trace_path:$PYTHONPATH"
 
-  echo "PYTEST_ADDOPTS=--ddtrace $PYTEST_ADDOPTS"
-  echo "PYTHONPATH=$dd_trace_path:$PYTHONPATH"
+  echo "PYTEST_ADDOPTS=$updated_pytest_add_opts"
+  echo "PYTHONPATH=$updated_python_path"
+
+  echo "TOX_OVERRIDE=testenv.setenv+=PYTEST_ADDOPTS=$updated_pytest_add_opts,PYTHONPATH=$updated_python_path"
 }
 
 install_dotnet_tracer() {
