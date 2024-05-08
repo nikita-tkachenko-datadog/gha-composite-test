@@ -112,6 +112,8 @@ install_dotnet_tracer() {
     return 1
   fi
 
+  ls -la $ARTIFACTS_FOLDER >&2
+
   # Using "jenkins" for now, as it outputs the env vars in a provider-agnostic format.
   # Grepping to filter out lines that are not environment variables
   $ARTIFACTS_FOLDER/dd-trace ci configure jenkins | grep '=' >&2
