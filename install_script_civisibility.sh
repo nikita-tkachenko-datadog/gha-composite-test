@@ -112,9 +112,14 @@ install_dotnet_tracer() {
     return 1
   fi
 
+  if [ -z "$DD_API_KEY" ]; then
+    >&2 echo "Error: dd-trace for .NET configuration requires DD_API_KEY to be set"
+    return 1
+  fi
+
   # Using "jenkins" for now, as it outputs the env vars in a provider-agnostic format.
   # Grepping to filter out lines that are not environment variables
-  $ARTIFACTS_FOLDER/dd-trace ci configure jenkins | grep '='
+  DD_CIVISIBILITY_AGENTLESS_ENABLED=true $ARTIFACTS_FOLDER/dd-trace ci configure jenkins | grep '='
 }
 
 # set common environment variables
