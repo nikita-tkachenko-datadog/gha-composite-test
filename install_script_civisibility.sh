@@ -45,7 +45,7 @@ install_js_tracer() {
   fi
 
   if ! is_node_version_compliant; then
-    >&2 echo "Error: node v18.0.0 or newer is required"
+    >&2 echo "Error: node v18.0.0 or newer is required, got $(node -v)"
     return 1
   fi
 
