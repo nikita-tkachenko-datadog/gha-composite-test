@@ -20,7 +20,9 @@ runs:
         GITHUB_ACTION_PATH: ${{ github.action_path }}
 
     - name: Run configuration script
-      run: install_script_civisibility.sh >> "$GITHUB_ENV"
+      run: |
+        install_script_civisibility.sh >> "$GITHUB_ENV"
+        echo "Node options is $NODE_OPTIONS"
       shell: bash
       env:
         DD_CIVISIBILITY_INSTRUMENTATION_LANGUAGES: ${{ inputs.languages }}

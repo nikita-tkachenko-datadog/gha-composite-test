@@ -63,7 +63,7 @@ install_js_tracer() {
   NODE_OPTIONS="$NODE_OPTIONS -r %s/ci/init $dd_trace_path"
 
   # workaround for https://github.blog/changelog/2023-10-05-github-actions-node_options-is-now-restricted-from-github_env
-  echo "NODE_OPTIONS=${NODE_OPTIONS}" >> $GITHUB_ENV
+  #echo "NODE_OPTIONS=${NODE_OPTIONS}"
 }
 
 is_node_version_compliant() {
