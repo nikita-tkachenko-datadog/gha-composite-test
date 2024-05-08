@@ -62,7 +62,7 @@ install_js_tracer() {
   # Github Actions prohibit setting NODE_OPTIONS
   if ! is_github_actions; then
     local dd_trace_path="$ARTIFACTS_FOLDER/lib/node_modules/dd-trace"
-    echo "NODE_OPTIONS=$NODE_OPTIONS -r %s/ci/init $dd_trace_path"
+    echo "NODE_OPTIONS=$NODE_OPTIONS -r $dd_trace_path/ci/init"
   fi
 }
 
