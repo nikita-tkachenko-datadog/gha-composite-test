@@ -102,6 +102,8 @@ install_python_tracer() {
 
   echo "PYTEST_ADDOPTS=$updated_pytest_add_opts"
   echo "PYTHONPATH=$updated_python_path"
+
+  echo "TOX_OVERRIDE=testenv.setenv+=PYTEST_ADDOPTS=--ddtrace,PYTHONPATH=$updated_python_path"
 }
 
 install_dotnet_tracer() {
