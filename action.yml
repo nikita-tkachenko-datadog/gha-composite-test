@@ -34,6 +34,8 @@ runs:
       env:
         DD_CIVISIBILITY_INSTRUMENTATION_LANGUAGES: ${{ inputs.languages }}
         DD_TRACER_FOLDER: ${{ github.workspace }}/.datadog
+        DD_CIVISIBILITY_AGENTLESS_ENABLED: true
+        DD_API_KEY: ${{ inputs.api-key }}
 
     - name: Propagate service name and API key from inputs to environment variables
       run: |

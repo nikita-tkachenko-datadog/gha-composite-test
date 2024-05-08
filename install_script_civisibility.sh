@@ -114,7 +114,7 @@ install_dotnet_tracer() {
 
   # Using "jenkins" for now, as it outputs the env vars in a provider-agnostic format.
   # Grepping to filter out lines that are not environment variables
-  $ARTIFACTS_FOLDER/dd-trace ci configure jenkins >&2
+  $ARTIFACTS_FOLDER/dd-trace ci configure jenkins | grep '='
 }
 
 # set common environment variables
