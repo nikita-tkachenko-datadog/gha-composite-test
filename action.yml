@@ -30,10 +30,13 @@ runs:
 
         # Setting NODE_OPTIONS via GITHUB_ENV is not allowed
         echo "node-options=$NODE_OPTIONS -r $DD_TRACER_FOLDER/lib/node_modules/dd-trace/ci/init" >> $GITHUB_OUTPUT
+
+        echo $DD_TRACER_FOLDER
+        ls -la $DD_TRACER_FOLDER
       shell: bash
       env:
         DD_CIVISIBILITY_INSTRUMENTATION_LANGUAGES: ${{ inputs.languages }}
-        DD_TRACER_FOLDER: .datadog
+        DD_TRACER_FOLDER: ${{ github.workspace }}/.datadog
 
     - name: Propagate service name and API key from inputs to environment variables
       run: |
