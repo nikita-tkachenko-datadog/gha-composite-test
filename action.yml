@@ -33,7 +33,7 @@ runs:
       shell: bash
       env:
         DD_CIVISIBILITY_INSTRUMENTATION_LANGUAGES: ${{ inputs.languages }}
-        DD_TRACER_FOLDER: ${{ github.workspace }}/.datadog
+        DD_TRACER_FOLDER: .datadog
 
     - name: Propagate service name and API key from inputs to environment variables
       run: |
