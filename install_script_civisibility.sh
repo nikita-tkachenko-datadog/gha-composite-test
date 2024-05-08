@@ -50,7 +50,7 @@ install_js_tracer() {
   fi
 
   # set location for installing global packages (the script may not have the permissions to write to the default one)
-  echo "NPM_CONFIG_PREFIX=$ARTIFACTS_FOLDER"
+  export NPM_CONFIG_PREFIX=$ARTIFACTS_FOLDER
 
   # install dd-trace as a "global" package
   # (otherwise, doing SCM checkout might rollback the changes to package.json, and any subsequent `npm install` calls will result in removing the package)
