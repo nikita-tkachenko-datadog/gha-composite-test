@@ -10,6 +10,10 @@ inputs:
   api-key:
     description: 'Datadog API key. Can be found at https://app.datadoghq.com/organization-settings/api-keys'
     required: true
+outputs:
+  node-options:
+    description: "NODE_OPTIONS environment variable value"
+    value: ${{ steps.run-configuration-script.outputs.node-options }}
 runs:
   using: "composite"
   steps:
@@ -20,16 +24,15 @@ runs:
         GITHUB_ACTION_PATH: ${{ github.action_path }}
 
     - name: Run configuration script
+      id: run-configuration-script
       run: |
         install_script_civisibility.sh >> "$GITHUB_ENV"
-        
-        # workaround for https://github.blog/changelog/2023-10-05-github-actions-node_options-is-now-restricted-from-github_env
-        NODE_OPTIONS="$NODE_OPTIONS -r %s/ci/init $DD_TRACER_FOLDER/lib/node_modules/dd-trace"
-        echo "NODE_OPTIONS=${NODE_OPTIONS}" >> $GITHUB_ENV
+
+        # Setting NODE_OPTIONS via GITHUB_ENV is not allowed
+        echo "node-options=$DD_NODE_OPTIONS" >> $GITHUB_OUTPUT
       shell: bash
       env:
         DD_CIVISIBILITY_INSTRUMENTATION_LANGUAGES: ${{ inputs.languages }}
-        DD_TRACER_FOLDER: ${{ github.workspace }}/.datadog
 
     - name: Propagate service name and API key from inputs to environment variables
       run: |

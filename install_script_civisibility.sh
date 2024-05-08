@@ -59,14 +59,26 @@ install_js_tracer() {
     return 1
   fi
 
-  #local dd_trace_path="$ARTIFACTS_FOLDER/lib/node_modules/dd-trace"
-  #echo "NODE_OPTIONS=$NODE_OPTIONS -r %s/ci/init $dd_trace_path"
+  local dd_trace_path="$ARTIFACTS_FOLDER/lib/node_modules/dd-trace"
+  local updated_node_options="$NODE_OPTIONS -r %s/ci/init $dd_trace_path"
+  if ! is_github_actions; then
+    echo "NODE_OPTIONS=$updated_node_options"
+  else
+    # Github Actions prohibit setting NODE_OPTIONS
+    export DD_NODE_OPTIONS="$updated_node_options"
+  fi
 }
 
 is_node_version_compliant() {
   local node_version=$(node -v | cut -d 'v' -f 2)
   local major_node_version=$(echo $node_version | cut -d '.' -f 1)
   if [ "$major_node_version" -lt 18 ]; then
+    return 1
+  fi
+}
+
+is_github_actions() {
+  if [ -z "$GITHUB_ACTION" ]; then
     return 1
   fi
 }
