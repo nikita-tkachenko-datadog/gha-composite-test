@@ -45,7 +45,7 @@ install_js_tracer() {
   fi
 
   if ! is_node_version_compliant; then
-    >&2 echo "Error: node v18.0.0 or newer is required"
+    >&2 echo "Error: node v18.0.0 or newer is required, got $(node -v)"
     return 1
   fi
 
@@ -60,7 +60,10 @@ install_js_tracer() {
   fi
 
   local dd_trace_path="$ARTIFACTS_FOLDER/lib/node_modules/dd-trace"
-  echo "NODE_OPTIONS=$NODE_OPTIONS -r %s/ci/init $dd_trace_path"
+  NODE_OPTIONS="$NODE_OPTIONS -r %s/ci/init $dd_trace_path"
+
+  # workaround for https://github.blog/changelog/2023-10-05-github-actions-node_options-is-now-restricted-from-github_env
+  echo "NODE_OPTIONS=${NODE_OPTIONS}" >> $GITHUB_ENV
 }
 
 is_node_version_compliant() {
