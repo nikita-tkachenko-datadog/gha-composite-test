@@ -97,6 +97,8 @@ install_python_tracer() {
     return 1
   fi
 
+  pip show ddtrace | grep Location &>2
+
   echo "PYTEST_ADDOPTS=--ddtrace $PYTEST_ADDOPTS"
   echo "PYTHONPATH=$dd_trace_path:$PYTHONPATH"
 }
