@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # This script installs Datadog tracing libraries for the specified languages
 # and prints to standard output the environment variables that need to be set for enabling Test Visibility.
 
@@ -60,9 +58,11 @@ install_js_tracer() {
   fi
 
   # Github Actions prohibit setting NODE_OPTIONS
+  local dd_trace_path="$ARTIFACTS_FOLDER/lib/node_modules/dd-trace/ci/init"
   if ! is_github_actions; then
-    local dd_trace_path="$ARTIFACTS_FOLDER/lib/node_modules/dd-trace"
-    echo "NODE_OPTIONS=$NODE_OPTIONS -r $dd_trace_path/ci/init"
+    echo "NODE_OPTIONS=$NODE_OPTIONS -r $dd_trace_path"
+  else
+    echo "DD_TRACE_PACKAGE=$dd_trace_path"
   fi
 }
 
@@ -86,7 +86,7 @@ install_python_tracer() {
     return 1
   fi
 
-  if ! pip install -U ddtrace >&2; then
+  if ! python -m venv .dd_civis_env >&2 && source .dd_civis_env/bin/activate >&2 && pip install -U ddtrace >&2; then
     >&2 echo "Error: Could not install ddtrace for Python"
     return 1
   fi
