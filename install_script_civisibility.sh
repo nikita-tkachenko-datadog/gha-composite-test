@@ -86,7 +86,10 @@ install_python_tracer() {
     return 1
   fi
 
-  if ! python -m venv .dd_civis_env >&2 && source .dd_civis_env/bin/activate >&2 && pip install -U ddtrace >&2; then
+  python -m venv .dd_civis_env >&2
+  source .dd_civis_env/bin/activate >&2
+
+  if ! pip install -U ddtrace >&2; then
     >&2 echo "Error: Could not install ddtrace for Python"
     return 1
   fi
