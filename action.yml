@@ -33,10 +33,15 @@ runs:
         DD_API_KEY: ${{ inputs.api-key }}
         DD_SITE: ${{ inputs.site }}
 
+    - name: Propagate optional site input to environment variable
+      if: "${{ inputs.site != '' }}"
+      run: |
+        echo "DD_SITE=${{ inputs.site }}" >> "$GITHUB_ENV"
+      shell: bash
+
     - name: Propagate service name and API key from inputs to environment variables
       run: |
         echo "DD_SERVICE=${{ inputs.service-name }}" >> "$GITHUB_ENV"
         echo "DD_API_KEY=${{ inputs.api-key }}" >> "$GITHUB_ENV"
-        echo "DD_SITE=${{ inputs.site }}" >> "$GITHUB_ENV"
-        echo "DD_CIVISIBILITY_INSTRUMENTATION_PROVIDER=github" >> "$GITHUB_ENV"
+        echo "DD_CIVISIBILITY_AUTO_INSTRUMENTATION_PROVIDER=github" >> "$GITHUB_ENV"
       shell: bash
