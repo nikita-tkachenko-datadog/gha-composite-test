@@ -89,7 +89,7 @@ install_python_tracer() {
   python -m venv .dd_civis_env >&2
   source .dd_civis_env/bin/activate >&2
 
-  if ! pip install -U ddtrace >&2; then
+  if ! pip install -U ddtrace coverage >&2; then
     >&2 echo "Error: Could not install ddtrace for Python"
     return 1
   fi
@@ -100,8 +100,16 @@ install_python_tracer() {
     return 1
   fi
 
+  local coverage_path=$(pip show coverage | grep Location | awk '{print $2}')
+  if ! [ -d $coverage_path ]; then
+    >&2 echo "Error: Could not determine coverage package location (tried $coverage_path)"
+    return 1
+  fi
+
+  echo "PYTHONPATH=$dd_trace_path:$coverage_path:$PYTHONPATH"
   echo "PYTEST_ADDOPTS=--ddtrace $PYTEST_ADDOPTS"
-  echo "PYTHONPATH=$dd_trace_path:$PYTHONPATH"
+
+  deactivate >&2
 }
 
 install_dotnet_tracer() {
