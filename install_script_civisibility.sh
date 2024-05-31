@@ -1,3 +1,8 @@
+# Unless explicitly stated otherwise all files in this repository are licensed
+# under the Apache License Version 2.0.
+# This product includes software developed at Datadog (https://www.datadoghq.com/)
+# Copyright 2024-present Datadog, Inc.
+
 # This script installs Datadog tracing libraries for the specified languages
 # and prints to standard output the environment variables that need to be set for enabling Test Visibility.
 

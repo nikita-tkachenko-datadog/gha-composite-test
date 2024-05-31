@@ -2,10 +2,10 @@ name: 'Configure Datadog Test Visibility'
 description: 'Installs Datadog tracers for configured languages and enables Test Visibility'
 inputs:
   languages:
-    description: 'List of languages to be instrumented. Can be either all or a space-separated subset of java, js, python, dotnet.'
+    description: 'List of languages to be instrumented. Can be either "all" or any of "java", "js", "python", "dotnet" (multiple languages can be specified as a space-separated list).'
     required: true
   service-name:
-    description: 'The name of the service or library being tested. This value is used for populating "test.service" tag in Datadog.'
+    description: 'The name of the service or library being tested.'
     required: true
   api-key:
     description: 'Datadog API key. Can be found at https://app.datadoghq.com/organization-settings/api-keys'
