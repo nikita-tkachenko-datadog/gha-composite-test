@@ -14,9 +14,13 @@ if ! mkdir -p $ARTIFACTS_FOLDER; then
   return 1
 fi
 
+echo "ARTIFACTS_FOLDER is $ARTIFACTS_FOLDER"
+
 install_java_tracer() {
   local url="https://dtdg.co/latest-java-tracer"
   local filepath="$ARTIFACTS_FOLDER/dd-java-agent.jar"
+
+  echo "filepath is $filepath"
 
   if command -v curl >/dev/null 2>&1; then
     curl -Lo "$filepath" "$url"

@@ -25,7 +25,7 @@ runs:
     - name: Run configuration script
       id: run-configuration-script
       run: |
-        ARTIFACTS_FOLDER=${{ github.workspace }}/.datadog install_script_civisibility.sh >> "$GITHUB_ENV"
+        ARTIFACTS_FOLDER=${{ github.workspace }}/.datadog ./install_script_civisibility.sh >> "$GITHUB_ENV"
       shell: bash
       env:
         DD_CIVISIBILITY_INSTRUMENTATION_LANGUAGES: ${{ inputs.languages }}
