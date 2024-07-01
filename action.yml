@@ -25,13 +25,14 @@ runs:
     - name: Run configuration script
       id: run-configuration-script
       run: |
-        ARTIFACTS_FOLDER=${{ github.workspace }}/.datadog install_script_civisibility.sh >> "$GITHUB_ENV"
+         install_script_civisibility.sh >> "$GITHUB_ENV"
       shell: bash
       env:
         DD_CIVISIBILITY_INSTRUMENTATION_LANGUAGES: ${{ inputs.languages }}
         DD_TRACER_FOLDER: ${{ github.workspace }}/.datadog
         DD_API_KEY: ${{ inputs.api-key }}
         DD_SITE: ${{ inputs.site }}
+        ARTIFACTS_FOLDER: ${{ github.workspace }}/.datadog
 
     - name: Propagate optional site input to environment variable
       if: "${{ inputs.site != '' }}"
