@@ -32,7 +32,7 @@ runs:
         DD_TRACER_FOLDER: ${{ github.workspace }}/.datadog
         DD_API_KEY: ${{ inputs.api-key }}
         DD_SITE: ${{ inputs.site }}
-        ARTIFACTS_FOLDER: ${{ github.workspace }}/.datadog
+        ARTIFACTS_FOLDER: ${{ github.workspace }}/.datadogss
 
     - name: Propagate optional site input to environment variable
       if: "${{ inputs.site != '' }}"
