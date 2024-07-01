@@ -33,7 +33,7 @@ jobs:
 
       - name: Check If Java Tracing Works
         run: |
-          LOG_FILE=${{ github.workspace }}/java-output.log
+          LOG_FILE=java-output.log
           TRACER_INIT_LOG="DATADOG TRACER CONFIGURATION"
           
           # there is currently a problem with Test Visibility in Java tracer that prevents it from exiting when tracing an "empty" Java process, hence the timeout
