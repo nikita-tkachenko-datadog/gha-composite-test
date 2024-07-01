@@ -47,4 +47,5 @@ runs:
         echo "DD_SERVICE=${{ inputs.service-name }}" >> "$GITHUB_ENV"
         echo "DD_API_KEY=${{ inputs.api-key }}" >> "$GITHUB_ENV"
         echo "DD_CIVISIBILITY_AUTO_INSTRUMENTATION_PROVIDER=github" >> "$GITHUB_ENV"
+        echo "### Hello world! :rocket:" >> $GITHUB_STEP_SUMMARY
       shell: bash
