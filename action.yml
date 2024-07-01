@@ -52,21 +52,21 @@ runs:
     - name: Print summary
       run: |
         echo "---" >> $GITHUB_STEP_SUMMARY
-        echo '<picture><source style="height: 3em" media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/nikita-tkachenko-datadog/gha-composite-test/main/logos/dd_logo_h_white.svg"><img style="height: 3em" src="https://raw.githubusercontent.com/nikita-tkachenko-datadog/gha-composite-test/main/logos/dd_logo_h_rgb.svg"></picture>' >> $GITHUB_STEP_SUMMARY
+        echo '<a target="_blank" title="Datadog Test Visibility" href="https://docs.datadoghq.com/tests/"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/nikita-tkachenko-datadog/gha-composite-test/main/logos/dd_logo_h_white.svg"><img width="200" alt="Datadog Test Visibility" src="https://raw.githubusercontent.com/nikita-tkachenko-datadog/gha-composite-test/main/logos/dd_logo_h_rgb.svg"></picture></a>' >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "Installed Test Visibility libraries:" >> $GITHUB_STEP_SUMMARY
         
         if [ ! -z "$DD_TRACER_VERSION_DOTNET" ]; then
-          echo "- .NET: $DD_TRACER_VERSION_DOTNET" >> $GITHUB_STEP_SUMMARY
+          echo "- __.NET:__ $DD_TRACER_VERSION_DOTNET" >> $GITHUB_STEP_SUMMARY
         fi
         if [ ! -z "$DD_TRACER_VERSION_JAVA" ]; then
-          echo "- Java: $DD_TRACER_VERSION_JAVA" >> $GITHUB_STEP_SUMMARY
+          echo "- __Java:__ $DD_TRACER_VERSION_JAVA" >> $GITHUB_STEP_SUMMARY
         fi
         if [ ! -z "$DD_TRACER_VERSION_JS" ]; then
-          echo "- JS: $DD_TRACER_VERSION_JS" >> $GITHUB_STEP_SUMMARY
+          echo "- __JS:__ $DD_TRACER_VERSION_JS" >> $GITHUB_STEP_SUMMARY
         fi
         if [ ! -z "$DD_TRACER_VERSION_PYTHON" ]; then
-          echo "- Python: $DD_TRACER_VERSION_PYTHON" >> $GITHUB_STEP_SUMMARY
+          echo "- __Python:__ $DD_TRACER_VERSION_PYTHON" >> $GITHUB_STEP_SUMMARY
         fi
         echo "---" >> $GITHUB_STEP_SUMMARY
       shell: bash
