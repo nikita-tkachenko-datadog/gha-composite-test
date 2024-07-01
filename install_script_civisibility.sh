@@ -8,7 +8,12 @@
 
 # The variables are printed in the following format: variableName=variableValue
 
-ARTIFACTS_FOLDER="${DD_TRACER_FOLDER:-$(pwd)/.datadog}"
+if [ -z "$DD_TRACER_FOLDER" ]; then
+  ARTIFACTS_FOLDER=$GITHUB_WORKSPACE/.datadog
+else
+  ARTIFACTS_FOLDER=$DD_TRACER_FOLDER
+fi
+
 if ! mkdir -p $ARTIFACTS_FOLDER; then
   >&2 echo "Error: Cannot create folder: $ARTIFACTS_FOLDER"
   return 1
