@@ -23,7 +23,7 @@ jobs:
         id: checkout
         uses: actions/checkout@v4
 
-      - name: Test Local Action
+      - name: Run Instrumentation Action
         id: test-action
         uses: ./
         with:
@@ -31,9 +31,12 @@ jobs:
           service-name: my-service
           api-key: "dummy"
 
-      - name: Run unit tests
+      - name: Check If Java Tracing Works
         run: |
           LOG_FILE=${{ github.workspace }}/java-output.log
           TRACER_INIT_LOG="DATADOG TRACER CONFIGURATION"
-          timeout 10s java -version | tee $LOG_FILE
+          
+          // there is currently a problem with Test Visibility in Java tracer that prevents it from exiting when tracing an "empty" Java process, hence the timeout
+          // the "true" is needed to not break the build when the timeout is triggered
+          timeout 10s java -version | tee $LOG_FILE || true
           grep -q $TRACER_INIT_LOG $LOG_FILE || { echo "Error: Output does not contain tracer initialisation log: $TRACER_INIT_LOG"; exit 1; }
