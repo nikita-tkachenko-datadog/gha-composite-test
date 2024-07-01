@@ -33,4 +33,4 @@ jobs:
 
       - name: Run unit tests
         run: |
-          DD_CIVISIBILITY_ENABLED=false java -version
+          java -version
