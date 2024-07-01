@@ -29,10 +29,9 @@ runs:
       shell: bash
       env:
         DD_CIVISIBILITY_INSTRUMENTATION_LANGUAGES: ${{ inputs.languages }}
-        DD_TRACER_FOLDER: ${{ github.workspace }}/.datadog
+        DD_TRACER_FOLDER: ${{ github.workspace }}/.datadogss
         DD_API_KEY: ${{ inputs.api-key }}
         DD_SITE: ${{ inputs.site }}
-        ARTIFACTS_FOLDER: ${{ github.workspace }}/.datadogss
 
     - name: Propagate optional site input to environment variable
       if: "${{ inputs.site != '' }}"
