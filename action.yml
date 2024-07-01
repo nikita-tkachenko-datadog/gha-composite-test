@@ -25,11 +25,14 @@ runs:
     - name: Run configuration script
       id: run-configuration-script
       run: |
+         mkdir -p $GITHUB_WORKSPACE/.datadog
+         mkdir -p /github/workspace
+         ln -s $GITHUB_WORKSPACE/.datadog /github/workspace/.datadog
          install_script_civisibility.sh >> "$GITHUB_ENV"
       shell: bash
       env:
         DD_CIVISIBILITY_INSTRUMENTATION_LANGUAGES: ${{ inputs.languages }}
-        DD_TRACER_FOLDER: ${{ github.workspace }}/.datadogss
+        DD_TRACER_FOLDER: /github/workspace/.datadog
         DD_API_KEY: ${{ inputs.api-key }}
         DD_SITE: ${{ inputs.site }}
 
