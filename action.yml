@@ -52,9 +52,9 @@ runs:
     - name: Print summary
       run: |
         echo "---" >> $GITHUB_STEP_SUMMARY
-        echo "### Datadog Test Visibility :rocket:" >> $GITHUB_STEP_SUMMARY
+        echo "<picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/nikita-tkachenko/gha-composite-test/main/logos/dd_logo_h_white.svg"><img src="https://raw.githubusercontent.com/nikita-tkachenko/gha-composite-test/main/logos/dd_logo_h_rgb.svg"></picture>" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
-        echo "Installed tracer libraries:" >> $GITHUB_STEP_SUMMARY
+        echo "Installed Test Visibility libraries:" >> $GITHUB_STEP_SUMMARY
         
         if [ ! -z "$DD_TRACER_VERSION_DOTNET" ]; then
           echo "- .NET: $DD_TRACER_VERSION_DOTNET" >> $GITHUB_STEP_SUMMARY
