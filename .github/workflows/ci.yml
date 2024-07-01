@@ -39,4 +39,4 @@ jobs:
           # there is currently a problem with Test Visibility in Java tracer that prevents it from exiting when tracing an "empty" Java process, hence the timeout
           # the "true" is needed to not break the build when the timeout is triggered
           timeout 10s java -version | tee $LOG_FILE || true
-          grep -q $TRACER_INIT_LOG $LOG_FILE || { echo "Error: Output does not contain tracer initialisation log: $TRACER_INIT_LOG"; exit 1; }
+          grep -q "$TRACER_INIT_LOG" $LOG_FILE || { echo "Error: Output does not contain tracer initialisation log: $TRACER_INIT_LOG"; exit 1; }
