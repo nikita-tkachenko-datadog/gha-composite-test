@@ -47,5 +47,25 @@ runs:
         echo "DD_SERVICE=${{ inputs.service-name }}" >> "$GITHUB_ENV"
         echo "DD_API_KEY=${{ inputs.api-key }}" >> "$GITHUB_ENV"
         echo "DD_CIVISIBILITY_AUTO_INSTRUMENTATION_PROVIDER=github" >> "$GITHUB_ENV"
-        echo "### Hello world! :rocket:" >> $GITHUB_STEP_SUMMARY
+      shell: bash
+
+    - name: Print summary
+      run: |
+        echo "---" >> $GITHUB_STEP_SUMMARY
+        echo "### Datadog Test Visibility :rocket:" >> $GITHUB_STEP_SUMMARY
+        echo "Installed tracer libraries:" >> $GITHUB_STEP_SUMMARY
+        
+        if [ ! -z "DD_TRACER_VERSION_DOTNET" ]; then
+          echo ".NET: $DD_TRACER_VERSION_DOTNET" >> $GITHUB_STEP_SUMMARY
+        fi
+        if [ ! -z "DD_TRACER_VERSION_JAVA" ]; then
+          echo "Java: $DD_TRACER_VERSION_JAVA" >> $GITHUB_STEP_SUMMARY
+        fi
+        if [ ! -z "DD_TRACER_VERSION_JS" ]; then
+          echo "JS: $DD_TRACER_VERSION_JS" >> $GITHUB_STEP_SUMMARY
+        fi
+        if [ ! -z "DD_TRACER_VERSION_PYTHON" ]; then
+          echo "JS: $DD_TRACER_VERSION_PYTHON" >> $GITHUB_STEP_SUMMARY
+        fi
+        echo "---" >> $GITHUB_STEP_SUMMARY
       shell: bash
